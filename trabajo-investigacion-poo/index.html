@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+  <header>
+    <h1>Juego de cartas el 21</h1>
+  </header>
+
+  <div id="game">
+    <h2>Jugador</h2>
+    <div id="player-hand"></div>
+    <h2>Computadora</h2>
+    <div id="dealer-hand"></div>
+
+    <div id="buttons">
+      <button id="hit-button" onclick="hit()">Pedir carta</button>
+      <button id="stand-button" onclick="stand()">Mostrar</button>
+      <button id="reset-button" onclick="reset()">Reiniciar</button>
+    </div>
+
+    <p id="mensaje"></p>
+    <p id="puntosJugador"></p>
+    <p id="puntosComputadora"></p>
+    
+
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
+
