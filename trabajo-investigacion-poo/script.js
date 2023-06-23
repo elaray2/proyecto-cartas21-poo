@@ -50,7 +50,7 @@ class JuegoCartas21 {
     document.getElementById("mensaje").textContent = `${message} Tu puntuación actual es ${this.playerScore}.`;
   
     if (this.playerScore > 21) {
-      document.getElementById("mensaje").textContent = "¡Te has pasado de 21! Has perdido😥.";
+      document.getElementById("mensaje").textContent = "¡Te has pasado de 21! Has perdido😥";
       this.endGame();
     }
   }
@@ -76,7 +76,7 @@ class JuegoCartas21 {
     if (this.dealerScore > 21 || this.playerScore > this.dealerScore) {
       document.getElementById("mensaje").textContent = "¡Has ganado!🏆"
     } else if (this.playerScore < this.dealerScore) {
-      document.getElementById("mensaje").textContent = "Has perdido😭."
+      document.getElementById("mensaje").textContent = "¡Has perdido! gana la computadora😭"
     } else {
       document.getElementById("mensaje").textContent = "¡Empate!🤛🏻🤜🏻"
     }
