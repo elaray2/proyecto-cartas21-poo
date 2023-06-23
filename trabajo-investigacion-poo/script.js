@@ -21,27 +21,40 @@ class JuegoCartas21 {
   }
 
   async hit() {
-    if (this.gameOver) return
-
-    const drawUrl = `https://deckofcardsapi.com/api/deck/${this.deckId}/draw/?count=1`;
-    const response = await fetch(drawUrl)
-    const data = await response.json()
-    const card = data.cards[0]
-    const value = this.getCardValue(card)
-
-    this.playerHand.push(card)
-    this.playerScore += value
-
-    const playerHandElement = document.getElementById("player-hand")
-    playerHandElement.innerHTML += `<img src="${card.image}">`
-
-    document.getElementById("mensaje").textContent = `Has recibido ${card.value} de ${card.suit}.`
-
+    if (this.gameOver) return;
+  
+    const drawUrl = `https://deckofcardsapi.com/api/deck/${this.deckId}/draw/?count=${this.playerHand.length === 0 ? 2 : 1}`;
+    const response = await fetch(drawUrl);
+    const data = await response.json();
+    const cards = data.cards;
+    
+    if (this.playerHand.length === 0) {
+      for (const card of cards) {
+        const value = this.getCardValue(card);
+        this.playerHand.push(card);
+        this.playerScore += value;
+        const playerHandElement = document.getElementById("player-hand");
+        playerHandElement.innerHTML += `<img src="${card.image}">`;
+      }
+    } else {
+      const card = cards[0];
+      const value = this.getCardValue(card);
+      this.playerHand.push(card);
+      this.playerScore += value;
+      const playerHandElement = document.getElementById("player-hand");
+      playerHandElement.innerHTML += `<img src="${card.image}">`;
+    }
+  
+    const cartasRecibidas = this.playerHand.length === 0 ? 2 : 1;
+    const message = cartasRecibidas > 1 ? `Has recibido ${cartasRecibidas} cartas.` : "";
+    document.getElementById("mensaje").textContent = `${message} Tu puntuación actual es ${this.playerScore}.`;
+  
     if (this.playerScore > 21) {
-      document.getElementById("mensaje").textContent = "¡Te has pasado de 21! Has perdido😥."
-      this.endGame()
+      document.getElementById("mensaje").textContent = "¡Te has pasado de 21! Has perdido😥.";
+      this.endGame();
     }
   }
+  
 
   async stand() {
     if (this.gameOver) return
